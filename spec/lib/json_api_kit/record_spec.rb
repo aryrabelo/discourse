@@ -2,7 +2,7 @@
 
 RSpec.describe JsonApiKit::Record do
   subject(:record) do
-    described_class.new(row, resource.fields(guardian:), type: "topics", relationships:)
+    described_class.new(row, resource.fields(guardian:), type: "topics", namespace:, relationships:)
   end
 
   fab!(:author, :user)
@@ -32,6 +32,7 @@ RSpec.describe JsonApiKit::Record do
     )
   end
   let(:relationships) { {} }
+  let(:namespace) { nil }
 
   describe "#attributes" do
     it "renders the fields that the resource declares" do
@@ -42,6 +43,22 @@ RSpec.describe JsonApiKit::Record do
   describe "#id" do
     it "returns the id as a string" do
       expect(record.id).to eq(topic.id.to_s)
+    end
+  end
+
+  describe "#namespace" do
+    context "when the resource declares none" do
+      it "returns nothing" do
+        expect(record.namespace).to be_nil
+      end
+    end
+
+    context "when the resource declares one" do
+      let(:namespace) { "data-explorer" }
+
+      it "returns it" do
+        expect(record.namespace).to eq("data-explorer")
+      end
     end
   end
 
@@ -95,6 +112,14 @@ RSpec.describe JsonApiKit::Record do
 
       it "keeps its own relationship" do
         expect(merged.relationships["user"].collapse { it.id }).to eq(author.id.to_s)
+      end
+    end
+
+    context "when the resource declares a namespace" do
+      let(:namespace) { "data-explorer" }
+
+      it "keeps it" do
+        expect(merged.namespace).to eq("data-explorer")
       end
     end
   end
