@@ -1,0 +1,19 @@
+plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/bot_controller.rb
+  s_22cb7a374f0170::t_a1333904099415 137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "83d110d8adfe203d46f55b481d416d8a40dc7f5b",
+  "prompts": {},
+  "sessions": {
+    "s_22cb7a374f0170": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cd1345e1-6c18-4a07-907d-1171a9a0049f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Ary Rabelo <aryrabelo@gmail.com>"
+    }
+  }
+}
